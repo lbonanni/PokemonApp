@@ -1,13 +1,14 @@
 import { LOAD_ALL_POKEMONS } from "../actions";
 
 const initialState = {
-  pokemon: "POKEMON DANS LE STATE INITAL"
+  pokemons: []
 };
 
 export default function pokemonReducer(state = initialState, action) {
+  console.log("test reducer", action);
   switch (action.type) {
     case LOAD_ALL_POKEMONS:
-      return { ...state, pokemon: "POKEMON DANS LE NOUVEAU STATE" };
+      return { ...state, pokemons: action.pokemons };
     default:
       return state;
   }

@@ -1,4 +1,13 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
 import pokemonReducer from "./reducers";
+import { watchFetchPokemon } from "./sagas";
 
-export const store = createStore(pokemonReducer);
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = createStore(
+  pokemonReducer,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(watchFetchPokemon);
