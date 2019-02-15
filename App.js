@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { List } from './js/components/List';
-import { Loader } from './js/components/Loader';
-import { getAllPokemon } from './js/services/pokemonService';
+import React, { Component } from "react";
+import { View, StyleSheet } from "react-native";
+import { List } from "./js/components/List";
+import { Loader } from "./js/components/Loader";
+import { getAllPokemon } from "./js/services/pokemonService";
 
 export default class App extends Component {
   constructor(props) {
@@ -10,23 +10,19 @@ export default class App extends Component {
 
     this.state = {
       data: []
-    }
+    };
   }
 
-  componentDidMount() {
-    this.getAllPokemon();
-  }
-
-  getAllPokemon = async () => {
+  async componentDidMount() {
     const data = await getAllPokemon();
 
-    this.setState({ data })
+    this.setState({ data });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Loader loaded={this.state.data.length !== 0}>
+        <Loader loaded={this.state.data.length}>
           <List data={this.state.data} />
         </Loader>
       </View>
@@ -36,7 +32,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     flex: 1
-  },
+  }
 });
