@@ -1,4 +1,13 @@
-import { createStore } from "redux";
+import { createEpicMiddleware } from "redux-observable";
+import { createStore, applyMiddleware } from "redux";
 import pokemonReducer from "./reducers";
+import { fetchAllPokemonsEpic } from "./epics";
 
-export const store = createStore(pokemonReducer);
+const epicMiddleware = createEpicMiddleware();
+
+export const store = createStore(
+  pokemonReducer,
+  applyMiddleware(epicMiddleware)
+);
+
+epicMiddleware.run(fetchAllPokemonsEpic);
